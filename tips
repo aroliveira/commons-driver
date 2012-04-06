@@ -1,0 +1,21 @@
+commitar no servidor:
+git push -u origin master
+
+link ensinando a configurar:
+http://help.github.com/linux-set-up-git/
+
+Pesquidando artefatos
+https://repository.jboss.org/nexus/index.html#welcome
+
+
+Alterando as versões dos submodulos:
+
+mvn versions:set -DnewVersion=2.50.1-SNAPSHOT
+It will adjust all pom versions, parent versions and dependency versions in a multi-module project.
+
+If you made a mistake, do
+
+mvn versions:revert
+afterwards, or
+
+mvn versions:commit
