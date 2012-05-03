@@ -1,4 +1,4 @@
-package aroliveira.lab.business.statement;
+package aroliveira.lab.business.entities.statement;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
@@ -25,7 +25,8 @@ import aroliveira.lab.structure.util.TypedFieldConverterTest;
 	CurrencyFieldTest.class,
 	IntegerFieldTest.class,
 	TypedFieldConverterTest.class,
-	StatementTest.class} 
+	StatementTest.class,
+	StatementLabelTest.class} 
 	)
 public class AllTests {
 }

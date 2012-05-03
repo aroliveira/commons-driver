@@ -1,4 +1,4 @@
-package aroliveira.lab.structure.entities.base;
+package aroliveira.lab.business.entities;
 
 import java.io.Serializable;
 

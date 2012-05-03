@@ -6,7 +6,7 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.NamedQuery;
 
-import aroliveira.lab.structure.entities.base.EntityBean;
+import aroliveira.lab.business.entities.EntityBean;
 import aroliveira.lab.structure.util.Type;
 
 @NamedQuery(name = "FieldEntity.findAll", query = "FROM FIELD F")

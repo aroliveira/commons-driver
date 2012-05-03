@@ -8,7 +8,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Transient;
 
-import aroliveira.lab.structure.entities.base.EntityBean;
+import aroliveira.lab.business.entities.EntityBean;
 import aroliveira.lab.structure.util.TypedFieldConvertable;
 
 @Entity(name="DRIVER")

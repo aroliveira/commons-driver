@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>aroliveira.lab</groupId>
 	<artifactId>commons-driver</artifactId>
-	<version>0.0.1</version>
+	<version>0.0.2</version>
 
 	<dependencies>
 		<dependency>
@@ -55,6 +55,22 @@
 			<artifactId>hibernate</artifactId>
 			<version>3.0</version>
 		</dependency>
+
+		<!-- <dependency> <groupId>com.h2database</groupId> <artifactId>h2</artifactId> 
+			<version>1.1.102</version> <scope>test</scope> </dependency> -->
+
+		<dependency>
+			<groupId>javax.enterprise</groupId>
+			<artifactId>cdi-api</artifactId>
+			<version>1.0-SP1</version>
+		</dependency>
+		
+        <dependency>
+            <groupId>org.glassfish.extras</groupId>
+            <artifactId>glassfish-embedded-all</artifactId>
+            <version>3.0.1</version>
+            <scope>test</scope>
+        </dependency>
 	</dependencies>
 
 	<build>

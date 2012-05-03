@@ -5,7 +5,7 @@ import java.text.Format;
 
 public interface TypedFieldConvertable {
 
-	Object getValue();
+	Object getValue(); 
 	
 	Object getValueFormatted(final String readedField, final Format format);
 }

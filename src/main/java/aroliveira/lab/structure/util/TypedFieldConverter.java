@@ -16,7 +16,7 @@ public class TypedFieldConverter {
 
 		case DATE:
 				return new DateField(readedField);
-
+ 
 		case INTEGER:
 				return new IntegerField(readedField);
 

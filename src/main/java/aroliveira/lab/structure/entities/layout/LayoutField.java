@@ -7,7 +7,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 
-import aroliveira.lab.structure.entities.base.EntityBean;
+import aroliveira.lab.business.entities.EntityBean;
 
 @NamedQuery(name = "LayoutField.findAll", query = "FROM LAYOUT_FIELD L")
 @Entity(name = "LAYOUT_FIELD")

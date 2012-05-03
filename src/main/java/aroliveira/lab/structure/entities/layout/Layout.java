@@ -12,7 +12,7 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
-import aroliveira.lab.structure.entities.base.EntityBean;
+import aroliveira.lab.business.entities.EntityBean;
 import aroliveira.lab.structure.util.TypedFieldConvertable;
 import aroliveira.lab.structure.util.TypedFieldConverter;
 

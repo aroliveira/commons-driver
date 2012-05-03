@@ -1,4 +1,4 @@
-package aroliveira.lab.util;
+package aroliveira.lab.structure.util;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -11,6 +11,6 @@ public class DateConverter {
 	}
 
 	public static String convertToString(Date purchaseDate) {
-		return SimpleDateFormat.getDateInstance().format(purchaseDate);
+		return SimpleDateFormat.getDateInstance().format(purchaseDate);		
 	}
 }
