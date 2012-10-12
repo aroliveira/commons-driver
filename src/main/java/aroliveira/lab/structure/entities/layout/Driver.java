@@ -18,7 +18,7 @@ public class Driver extends EntityBean{
 
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="ID_LAYOUT")
-	private Layout layout;
+	private Layout<? extends LayoutField> layout;
 
 	@Transient
 	private FileManager fileManager;
@@ -26,20 +26,21 @@ public class Driver extends EntityBean{
 	@Transient
 	private String fileName;
 
-	public Driver(Layout layout, String fileName) {
+	public Driver(Layout<? extends LayoutField> layout, String fileName) {
 		setLayout(layout);
 		setFileName(fileName);
 	}	
 	
-	public Layout getLayout() {
+	public Layout<? extends LayoutField> getLayout() {
 		return layout;
 	}
 
-	void setLayout(Layout layout) {
+	void setLayout(Layout<? extends LayoutField> layout) {
 		
 		if ( layout == null ) throw new RuntimeException("Layout cannot be null");
 
 		this.layout = layout;
+		
 	}
 
 	public String getFileName() {
@@ -55,7 +56,7 @@ public class Driver extends EntityBean{
 		this.fileName = fileName;
 	}
 
-	public Map<String, TypedFieldConvertable> nextRegister() {
+	public Map<LayoutField, TypedFieldConvertable> nextRegister() {
 		
 		if ( fileManager == null ) initializeFileManager();
 

@@ -3,6 +3,7 @@ package aroliveira.lab.business.entities.statement;
 import java.util.Collection;
 
 import javax.enterprise.inject.Alternative;
+import org.junit.Test;
 
 @Alternative
 public class StatementLabelFinderForTest implements StatementLabelFinder {
@@ -17,4 +18,8 @@ public class StatementLabelFinderForTest implements StatementLabelFinder {
 	public Collection<StatementLabel> allLabels() {
 		return labels;
 	}
+	
+	@Test
+	public void opa() {
+	}	
 }

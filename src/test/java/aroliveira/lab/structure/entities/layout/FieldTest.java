@@ -31,7 +31,7 @@ public class FieldTest {
 		assertNotNull("Should exists a created Field", field);
 		assertEquals("Field name", "Field test", field.getName());
 		assertEquals("Field type",Type.INTEGER, field.getType());
-		
+
 		assertEquals("Print of field", "Field: 'Field test' Type: 'INTEGER'", field.toString());
 	}
 }

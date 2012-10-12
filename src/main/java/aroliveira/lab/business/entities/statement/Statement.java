@@ -22,8 +22,6 @@ import aroliveira.lab.structure.util.DateConverter;
 
 @NamedQueries({ @NamedQuery(name = "Statement.findAll", query = "FROM STATEMENT S"), 
 			    @NamedQuery(name = "Statement.findByDescription", query="FROM STATEMENT S WHERE S.description = ?1") })
-// from User u where u.emailAddress = ?1
-// "SELECT p from Person p where p.firstName like :name "
 @Entity(name = "STATEMENT")
 public class Statement extends EntityBean {
 
@@ -40,9 +38,7 @@ public class Statement extends EntityBean {
 	private Date purchaseDate;
 	
 	@ManyToMany(cascade={CascadeType.ALL}, fetch=FetchType.EAGER)
-/*	@JoinTable(name="STATEMENT_STATEMENT_LABEL")*/
 	private List<StatementLabel> labels = new ArrayList<StatementLabel>();
-
 
 	public Statement() {}
 

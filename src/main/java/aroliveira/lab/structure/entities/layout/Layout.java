@@ -1,8 +1,6 @@
 package aroliveira.lab.structure.entities.layout;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -14,78 +12,44 @@ import javax.persistence.OneToMany;
 
 import aroliveira.lab.business.entities.EntityBean;
 import aroliveira.lab.structure.util.TypedFieldConvertable;
-import aroliveira.lab.structure.util.TypedFieldConverter;
 
 @Entity(name="LAYOUT")
-
-public class Layout extends EntityBean {
+public abstract class Layout<T extends LayoutField> extends EntityBean {
 
 	private static final long serialVersionUID = -1659962669068169888L;
 
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name="ID_LAYOUT")
-	List<LayoutField> layoutFields;
+	List<T> layoutFields;
 
 	@Column(name="NAME")
 	String name;
 
+	abstract void addLayoutField(T x);
+	
+	public abstract Map<LayoutField, TypedFieldConvertable> convertLine(String readLine);	
+	
 	public Layout(String name) {
-		setName(name);
-		setLayoutFields(new ArrayList<LayoutField>());
+		this(null, name);
 	}
 	
-	public Layout(List<LayoutField> layoutFields, String name) {
-		
-		this(name);
+	public Layout(List<T> layoutFields, String name) {
+		setName(name);
 		setLayoutFields(layoutFields);
 	}
-
-	void addLayoutField(LayoutField layoutField){
+	
+	private void setLayoutFields(List<T> layoutFields) {
 		
-		List<LayoutField> aux = new ArrayList<LayoutField>(getLayoutFields());
-		aux.add(layoutField);
-		Collections.sort(aux);
-		checkIfExistsFieldsWithSameInitialPosition(aux);
+		if (layoutFields == null) 
+			layoutFields = new ArrayList<T>();
 		
-		layoutFields.add(layoutField);
-		Collections.sort(layoutFields);
-	}
-
-	void removeLayoutField(LayoutField layoutField){
-		layoutFields.remove(layoutField);
-	}
-
-	public List<LayoutField> getLayoutFields(){
-		return layoutFields;
-	}
-
-	private void setLayoutFields(List<LayoutField> layoutFields) {
-		
-		if (layoutFields == null) return;
-
-		Collections.sort(layoutFields);
-
-		if (layoutFields.size() > 0) {
-			checkIfExistsFieldsWithSameInitialPosition(layoutFields);
-		}
+		checkFields(layoutFields);
 		
 		this.layoutFields = layoutFields;
 	}
 
-	private void checkIfExistsFieldsWithSameInitialPosition(List<LayoutField> layoutFields) {
-		
-		LayoutField field = layoutFields.get(0);
-
-		int indexPosition = field.getInitialPosition() + field.getSize();
-
-		for (int i = 1; i < layoutFields.size(); i++) {
-			
-			if ( layoutFields.get(i).getInitialPosition().equals(field.getInitialPosition()))
-				throw new RuntimeException("cannot exists two fields with same initial position");
-			
-			if ( layoutFields.get(i).getInitialPosition() < indexPosition )
-				throw new RuntimeException("cannot exists two fields in the same position");
-		}
+	public List<T> getLayoutFields() {
+		return layoutFields;
 	}
 	
 	void setName(String name){
@@ -100,64 +64,13 @@ public class Layout extends EntityBean {
 	public String getName(){
 		return name;
 	}
+
+	
+	
+	protected void checkFields(List<T> layoutFields) {}
 	
 	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result
-				+ ((layoutFields == null) ? 0 : layoutFields.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Layout other = (Layout) obj;
-		if (layoutFields == null) {
-			if (other.layoutFields != null)
-				return false;
-		} else if (!layoutFields.equals(other.layoutFields))
-			return false;
-		return true;
-	}
-
-	@Override
 	public String toString() {
-		return "Layout: " + this.getName() + " fields: \n" + this.getLayoutFields();
+		return "Layout: " + this.getName();
 	}
-
-	public Map<String, TypedFieldConvertable> convertLine(String readLine) {
-
-		throwsAExceptionIfLineIsNotValid(readLine);
-		
-		Map<String, TypedFieldConvertable> mapFields = new HashMap<String, TypedFieldConvertable>();
-
-		for (LayoutField layoutField : layoutFields) {
-
-			int initialPosition = layoutField.getInitialPosition();
-			int size = layoutField.getSize();
-			
-			String fieldName = layoutField.getField().getName();
-			TypedFieldConvertable fieldConverted = TypedFieldConverter.convertToCorrectType(readLine.substring(initialPosition, initialPosition + size), layoutField.getField()); 
-
-			mapFields.put(fieldName, fieldConverted);
-		}
-		
-		return mapFields;
-	}
-
-	private void throwsAExceptionIfLineIsNotValid(final String readLine) {
-		
-		LayoutField field = layoutFields.get(layoutFields.size() - 1);
-
-		if ( field.getInitialPosition() + field.getSize() > readLine.length() )
-			throw new RuntimeException("Invalid line");
-		
-	}	
 }
